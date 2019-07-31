@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Comment</key>
-	<string>This file is for 10.12.6+ with native KabyLake support</string>
+	<string>This file is for 10.14.x with native CoffeeLake support</string>
 	<key>ACPI</key>
 	<dict>
 		<key>AutoMerge</key>
@@ -180,8 +180,8 @@
 	<key>Boot</key>
 	<dict>
 		<key>Arguments</key>
-		<string>dart=0 nv_disable=1 -disablegfxfirmware -cdfon -igfxnohdmi lilucpu=9</string>
-		<key>#DefaultVolume</key>
+		<string>dart=0  -cdfon lilucpu=8  debug=0x100 -v</string>
+		<key>DefaultVolume</key>
 		<string>LastBootedVolume</string>
 		<key>NeverHibernate</key>
 		<true/>
@@ -292,9 +292,7 @@
 			<key>PciRoot(0)/Pci(0x02,0)</key>
 			<dict>
 				<key>AAPL,ig-platform-id</key>
-				<data>AAAbWQ==</data>
-				<key>device-id</key>
-				<data>FlkAAA==</data>
+				<data>AACbPg==</data>
 				<key>#hda-gfx</key>
 				<string>onboard-1</string>
 				<key>#AAPL00,override-no-connect</key>
@@ -321,6 +319,8 @@
 				<integer>1</integer>
 				<key>#framebuffer-con1-type</key>
 				<data>AAgAAA==</data>
+				<key># Note1</key>
+				<string> no HDMI example in CoffeeLake, flags 86090000 seen in CannonLake?</string>
 				<key>#framebuffer-con1-flags</key>
 				<data>hwEAAA==</data>
 				<key>#framebuffer-con1-pipe</key>
@@ -345,24 +345,18 @@
 				<data>hwEAAA==</data>
 				<key>#framebuffer-con3-pipe</key>
 				<data>EgAAAA==</data>
-				<key>#1 0306-&gt;0105</key>
-				<string>0x591b0000, 0105 instead of 0306, HDMI</string>
-				<key>#1 framebuffer-con1-enable</key>
+				<key>#2 0204-&gt;0306</key>
+				<string>0x3e9b0000, 0306 instead of 0204, HDMI</string>
+				<key>#2 framebuffer-con2-enable</key>
 				<integer>1</integer>
-				<key>#1 framebuffer-con1-alldata</key>
-				<data>AQUKAAAIAACHAQAAAgQKAAAIAACHAQAA/wAAAAEAAAAgAAAA</data>
-				<key>#2 0204-&gt;0105</key>
-				<string>0x591b0000, 0105 instead of 0204, HDMI</string>
-				<key>#2 framebuffer-con1-enable</key>
-				<integer>1</integer>
-				<key>#2 framebuffer-con1-alldata</key>
-				<data>AQUKAAAIAACHAQAAAwYKAAAEAACHAQAA/wAAAAEAAAAgAAAA</data>
+				<key>#2 framebuffer-con2-alldata</key>
+				<data>AwYIAAAEAADHAwAA</data>
 				<key>#3 no external</key>
-				<string>0x591b0000, eliminate all external ports (0204 and 0306)</string>
+				<string>0x3e9b0000, eliminate all external ports (0105 and 0204)</string>
 				<key>#3 framebuffer-con1-enable</key>
 				<integer>1</integer>
 				<key>#3 framebuffer-con1-alldata</key>
-				<data>/wAAAAEAAAAgAAAA/wAAAAEAAAAgAAAA/wAAAAEAAAAgAAAA</data>
+				<data>/wAAAAEAAAAgAAAA/wAAAAEAAAAgAAAA</data>
 			</dict>
 			<key>PciRoot(0)/Pci(0x1f,3)</key>
 			<dict>
@@ -435,7 +429,7 @@
 		<key>#ScreenResolution</key>
 		<string>1920x1080</string>
 		<key>Theme</key>
-		<string>BGM</string>
+		<string>Clovy</string>
 	</dict>
 	<key>Graphics</key>
 	<dict>
@@ -445,7 +439,7 @@
 			<false/>
 		</dict>
 		<key>#ig-platform-id</key>
-		<string>0x591b0000</string>
+		<string>0x3e9b0000</string>
 		<key>Inject</key>
 		<dict>
 			<key>ATI</key>
@@ -516,7 +510,7 @@
 	<key>SMBIOS</key>
 	<dict>
 		<key>ProductName</key>
-		<string>MacBookPro14,1</string>
+		<string>MacBookPro15,2</string>
 		<key>Trust</key>
 		<true/>
 	</dict>

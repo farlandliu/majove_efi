@@ -1,4 +1,4 @@
-# Majove installation for Lenovo ZHAOYANG (联想昭阳) E42-80  I7-7500U @ 2.7GHZ
+# Majove installation for Lenovo ZHAOYANG (联想昭阳) E42-80  I7-7500U @ 2.7GHZ HD620
 This repo is  Majove installation config files for Lenovo ZHAOYANG E42-80 I7-7500U 2.7MHZ
 
 ## Bios Settings
@@ -8,7 +8,7 @@ This repo is  Majove installation config files for Lenovo ZHAOYANG E42-80 I7-750
 - Boot Mode: Legacy Support
 - Boor Priority: UEFI first
 
-## Prepare Clover boot USB
+## Prepare Clover booting USB
 
 - Clover EFI v2.4k_r4988
   https://sourceforge.net/projects/cloverefiboot/files/Installer/Clover_v2.4k_r4988.zip/download
@@ -17,7 +17,7 @@ This repo is  Majove installation config files for Lenovo ZHAOYANG E42-80 I7-750
 
   The completed Majove booting USB is:
 
-  ```
+```
   > diskutil list
   ...
 /dev/disk2 (external, physical):
@@ -27,23 +27,23 @@ This repo is  Majove installation config files for Lenovo ZHAOYANG E42-80 I7-750
    2:                  Apple_HFS Install macOS Mojave    15.3 GB    disk2s2
   ```
 
-  The clover installer options is as the follow:
+  - The Clover installer options is as the follow:
+    - select the target of the install to "CLOVER EFI" using "Change Install Location"
+    - select "Customize" (we need to change some of the default options)
+    - "Install for UEFI booting only": unchecked
+    - "Install Clover in the ESP": unchecked
+    - Dirvers off: checked
+    - Boot Sectors: 
+        - install boot0af in MBR: checked
+    - Clover for BIOS legacy booting
+        - Clover EFI 64-bits SATA
+    - UEFI drivers
+        - File system drivers: checked all
+    - Themes: Clovy
+    - copy HFSPlus.efi to drivers/UEFI, otherwise can't find the majove installer partition in the USB
+       https://github.com/JrCs/CloverGrowerPro/raw/master/Files/HFSPlus/X64/HFSPlus.efi
 
-  > For Clover legacy, run the Clover Installer package:
-  - select the target of the install to "CLOVER EFI" using "Change Install Location"
-  - select "Customize" (we need to change some of the default options)
-  - "Install for UEFI booting only": unchecked
-  - "Install Clover in the ESP": unchecked
-  - Dirvers off: checked
-  - Boot Sectors: 
-      - install boot0af in MBR: checked
-  - Clover for BIOS legacy booting
-      - Clover EFI 64-bits SATA
-  - UEFI drivers
-      - File system drivers: checked all
-  - Themes: Clovy
-
-- Prepare the other Kexts:
+- Prepare Kexts in the `other` folder :
   - FakeSMC.kext
   - USBInjectAll.kext
   - GenericUSBXHCI.kext
@@ -51,8 +51,23 @@ This repo is  Majove installation config files for Lenovo ZHAOYANG E42-80 I7-750
   - WhateverGreen.kext
   - SATA-unsupported.kext
   - **VoodooTSCSync.kext**
-    This the most import kext for lenovo E42-80, if no this kext, the laptop can't boot into the macOS installer, will be stuck at the logo screen or phase 2 installing screen.
+    > This the most import kext for lenovo E42-80, if no this kext, the laptop can't boot into the macOS installer, will froze at the loading bar comes out(boot with args -v). credit @hswwm, refer this [post](http://bbs.pcbeta.com/viewthread-1796587-1-1.html) at the chinese language forum.
+
+    > **Issue description**: 
+    when trying to install majove on E42-80, mostly the system can't boot into the installing phase. That was when you finished the installation pahse 1,  system will frozen when the loading bar comes out after rebooting. Even reboot, it will still froze at the loading screen. 
+    I've tried several ways to fix the problem,  including injecting the fake graphic id, changing the boot args with -f(hopes clear the cache). Sometimes, when I changed the config file, maybe can finished the installing phase 1, but frozed again after reboot. 
+    The issue finally fixed by add this kext: VoodooTSCSync.kext.
+
 
 - Choosing a config.plist:
-  select "config_HD615_620_630_640_650.plist" from https://github.com/RehabMan/OS-X-Clover-Laptop-Config
-  
+  select "config_UHD630.plist" from https://github.com/RehabMan/OS-X-Clover-Laptop-Config/raw/master/config_UHD630.plist
+
+  values edited from the raw plist:
+  > ref: Problems with Kaby Lake Graphics
+https://www.tonymacx86.com/threads/readme-common-problems-and-workarounds-on-10-14-mojave.255823/
+    - boot args: dart=0  -cdfon lilucpu=8  debug=0x100 -v
+    - themes: Clovy
+
+
+
+
