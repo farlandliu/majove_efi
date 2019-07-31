@@ -1,2 +1,4 @@
 # Build and Release Folders
 .DS_*
+kexts/booting/*
+kexts/post_install/*
