@@ -67,6 +67,9 @@ This repo is  Majove installation config files for Lenovo ZHAOYANG E42-80 I7-750
 https://www.tonymacx86.com/threads/readme-common-problems-and-workarounds-on-10-14-mojave.255823/
     - boot args: dart=0  -cdfon lilucpu=8  debug=0x100 -v
     - themes: Clovy
+    - boot - Legacy: PBR
+    - Graphics - Inject - ATI= NO, Nvidia=No, Intel=No
+    - AAPL,ig-platform-id= 00001B59 , device-id=16590000 
 
 
 
